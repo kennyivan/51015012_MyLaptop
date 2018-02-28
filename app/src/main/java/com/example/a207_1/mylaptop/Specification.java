@@ -1,10 +1,13 @@
 package com.example.a207_1.mylaptop;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by 207-1 on 08/02/2018.
  */
 
-public class Specification {
+public class Specification implements Parcelable {
     private String processor;
     private String vga;
     private String ram;
@@ -15,9 +18,8 @@ public class Specification {
     private String harga;
 
     protected String[][] data = new String[][]{
-            {"00001","Razer Blade 14 Gaming RZ09","Rp 31.200.000","i7-7700HQ-2.8Ghz-3.8Ghz","NVIDIA GTX1060M-6GB","8GB DDR4 Single Channel","512GB SSD","1920 x 1080"},
-            {"00002","ASUS ROG Gaming Laptop G752VS","Rp 26.999.000","i7-6700HQ-3.5GHz","NVIDIA GeForce GDDR5X GTX1070-8GB ","16GB DDR4 Dual Channel","None","1920 x 1080"},
-            {"00003","MSI Laptop Gaming GE62 6QF Apache Pro 15.6","Rp 42.314.000","i7-6700HQ","NVIDIA GeForce GTX-970M 3GB","8GB DDR4 Single Channel","128GB SSD","1920 x 1080"}
+            {"00001","ASUS ROG Gaming Laptop G752VS","Rp 26.999.000","i7-6700HQ-3.5GHz","NVIDIA GeForce GDDR5X GTX1070-8GB ","16GB DDR4 Dual Channel","None","1920 x 1080"}
+
     };
 
     public Specification(String id_item) {
@@ -105,4 +107,43 @@ public class Specification {
         this.id_item = id_item;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.processor);
+        dest.writeString(this.vga);
+        dest.writeString(this.ram);
+        dest.writeString(this.ssd);
+        dest.writeString(this.resolusi);
+        dest.writeString(this.id_item);
+        dest.writeString(this.nama);
+        dest.writeString(this.harga);
+    }
+
+    protected Specification(Parcel in) {
+        this.processor = in.readString();
+        this.vga = in.readString();
+        this.ram = in.readString();
+        this.ssd = in.readString();
+        this.resolusi = in.readString();
+        this.id_item = in.readString();
+        this.nama = in.readString();
+        this.harga = in.readString();
+    }
+
+    public static final Parcelable.Creator<Specification> CREATOR = new Parcelable.Creator<Specification>() {
+        @Override
+        public Specification createFromParcel(Parcel source) {
+            return new Specification(source);
+        }
+
+        @Override
+        public Specification[] newArray(int size) {
+            return new Specification[size];
+        }
+    };
 }

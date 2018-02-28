@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 user= new Users(emailkey);
                 if(emailkey.equals(user.getEmail())&&passkey.equals(user.getPassword())){
                     Toast.makeText(getApplicationContext(), "Login Sukses", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,ListActivity.class);
+                    Intent intent = new Intent(MainActivity.this,LaptopActivity.class);
                     intent.putExtra(id,user.getEmail());
                     startActivity(intent);
                     et_email.setText(" ");
